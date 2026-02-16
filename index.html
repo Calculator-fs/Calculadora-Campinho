@@ -12,6 +12,20 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Otimizações de performance */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        img {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background: #000000;
@@ -19,6 +33,8 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body::before {
@@ -34,6 +50,8 @@
                 radial-gradient(circle at 50% 50%, rgba(0, 80, 180, 0.15) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
+            will-change: auto;
+            transform: translateZ(0);
         }
 
         body::after {
@@ -49,6 +67,9 @@
             background-size: 50px 50px;
             pointer-events: none;
             z-index: 0;
+            opacity: 0.5;
+            will-change: auto;
+            transform: translateZ(0);
         }
 
         .container {
@@ -66,30 +87,60 @@
         }
 
         .mural-btn {
-            padding: 14px 32px;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            border: 2px solid #60a5fa;
-            border-radius: 14px;
-            color: white;
-            font-size: 1.1em;
-            font-weight: 700;
+            padding: 10px 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            color: #60a5fa;
+            font-size: 0.95em;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            transition: all 0.2s ease;
+            letter-spacing: 0.3px;
             margin-bottom: 25px;
             display: inline-block;
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            margin-right: 10px;
         }
 
         .mural-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.6);
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-1px) translateZ(0);
         }
 
         .mural-btn:active {
-            transform: translateY(-1px);
+            transform: translateY(0) translateZ(0);
+        }
+
+        .info-btn {
+            padding: 10px 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            color: #60a5fa;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 0.3px;
+            margin-bottom: 25px;
+            display: inline-block;
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .info-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-1px) translateZ(0);
+        }
+
+        .info-btn:active {
+            transform: translateY(0) translateZ(0);
         }
 
         @keyframes fadeInDown {
@@ -144,6 +195,8 @@
             animation: fadeIn 0.8s ease-out 0.2s both;
             position: relative;
             overflow: hidden;
+            will-change: opacity;
+            transform: translateZ(0);
         }
 
         .total-bar::before {
@@ -155,11 +208,12 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
             animation: shimmer 3s infinite;
+            will-change: transform;
         }
 
         @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 200%; }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(200%); }
         }
 
         @keyframes fadeIn {
@@ -198,8 +252,10 @@
             border: 2px solid rgba(59, 130, 246, 0.3);
             border-radius: 30px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .toggle-btn:hover {
@@ -207,7 +263,7 @@
             box-shadow: 
                 inset 0 2px 10px rgba(0, 0, 0, 0.3),
                 0 0 25px rgba(59, 130, 246, 0.4);
-            transform: scale(1.05);
+            transform: scale(1.05) translateZ(0);
         }
 
         .toggle-btn.active {
@@ -227,12 +283,14 @@
             border-radius: 50%;
             top: 2px;
             left: 3px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .toggle-btn.active::after {
-            left: 38px;
+            transform: translateX(35px) translateZ(0);
             background: linear-gradient(135deg, #ffffff 0%, #dbeafe 100%);
         }
 
@@ -283,9 +341,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .product-item::before {
@@ -296,11 +356,12 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
-            transition: left 0.6s ease;
+            transition: transform 0.6s ease;
+            will-change: transform;
         }
 
         .product-item:hover {
-            transform: translateX(8px);
+            transform: translateX(8px) translateZ(0);
             border-color: rgba(59, 130, 246, 0.5);
             box-shadow: 
                 0 8px 30px rgba(0, 0, 0, 0.4),
@@ -308,7 +369,7 @@
         }
 
         .product-item:hover::before {
-            left: 100%;
+            transform: translateX(200%);
         }
 
         .product-info {
@@ -365,23 +426,26 @@
             font-size: 1.5em;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
         .qty-btn:hover {
             background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             border-color: #60a5fa;
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.1) translateZ(0);
             box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
         }
 
         .qty-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.95) translateZ(0);
         }
 
         .qty-input {
@@ -548,6 +612,8 @@
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             animation: fadeIn 0.3s ease;
+            will-change: opacity;
+            transform: translateZ(0);
         }
 
         .modal.active {
@@ -565,6 +631,10 @@
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
             max-height: 90vh;
             overflow-y: auto;
+            will-change: transform;
+            transform: translateZ(0);
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
         .modal-header {
@@ -598,14 +668,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
         .close-btn:hover {
             background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             border-color: #ef4444;
             color: white;
-            transform: rotate(90deg) scale(1.1);
+            transform: rotate(90deg) scale(1.1) translateZ(0);
         }
 
         .gallery {
@@ -620,13 +693,16 @@
             border-radius: 16px;
             overflow: hidden;
             border: 2px solid rgba(59, 130, 246, 0.3);
-            transition: all 0.4s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             background: rgba(15, 23, 42, 0.6);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
         .gallery-item:hover {
-            transform: translateY(-8px);
+            transform: translateY(-8px) translateZ(0);
             border-color: rgba(59, 130, 246, 0.6);
             box-shadow: 0 15px 50px rgba(59, 130, 246, 0.4);
         }
@@ -635,12 +711,14 @@
             width: 100%;
             height: auto;
             display: block;
-            transition: all 0.4s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
             opacity: 0;
+            will-change: transform, opacity;
+            transform: translateZ(0);
         }
 
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.05) translateZ(0);
         }
 
         .thank-you-message {
@@ -681,6 +759,154 @@
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
+        }
+
+        /* Info Modal */
+        .info-section {
+            margin-bottom: 40px;
+        }
+
+        .info-title {
+            font-size: 1.8em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.4));
+        }
+
+        .info-subtitle {
+            font-size: 1.4em;
+            color: #e2e8f0;
+            font-weight: 700;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .info-text {
+            color: #cbd5e1;
+            font-size: 1.05em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .info-highlight {
+            background: rgba(59, 130, 246, 0.15);
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .info-rules {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-rules li {
+            color: #cbd5e1;
+            font-size: 1.05em;
+            padding: 12px 0 12px 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .info-rules li::before {
+            content: '•';
+            color: #60a5fa;
+            font-size: 1.5em;
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        .uniform-numbers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .uniform-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .uniform-card h4 {
+            color: #60a5fa;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .uniform-card p {
+            color: #e2e8f9;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .uniform-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .uniform-images img {
+            width: 100%;
+            border-radius: 12px;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .uniform-images img:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            transform: scale(1.02);
+        }
+
+        .radio-section {
+            background: rgba(30, 41, 59, 0.6);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .radio-frequencies {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .frequency-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            border-radius: 12px;
+            padding: 20px 30px;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .frequency-label {
+            color: #94a3b8;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .frequency-number {
+            color: #60a5fa;
+            font-size: 2em;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
         }
 
         /* Scrollbar styling */
@@ -773,7 +999,10 @@
 <body>
     <div class="container">
         <div class="header">
-            <button class="mural-btn" onclick="openMural()">📸 Mural</button>
+            <div style="margin-bottom: 25px;">
+                <button class="mural-btn" onclick="openMural()">📸 Mural</button>
+                <button class="info-btn" onclick="openInfo()">📋 Informações</button>
+            </div>
             <h1>🎯 CAMPINHO</h1>
             <p>Calculadora de Items Campinho</p>
         </div>
@@ -877,6 +1106,7 @@
 
         <div class="footer">
             <p>⚠️ Todos os itens são virtuais e destinados apenas para uso no jogo</p>
+            <p style="margin-top: 15px; color: #60a5fa; font-weight: 600; font-size: 0.95em;">✨ Feito por Nivyk Ktx</p>
         </div>
     </div>
 
@@ -913,6 +1143,98 @@
                 <span class="emoji">❤️</span>
                 <h2>Muito Obrigado!</h2>
                 <p>Vocês são os melhores! Cada momento compartilhado aqui representa nossa jornada juntos. Agradecemos por fazer parte dessa família e por tornar o Campinho cada vez mais especial. Continuem sendo incríveis! 🚀✨</p>
+                <p style="margin-top: 20px; font-size: 1.2em; font-weight: 600; color: #60a5fa;">- Dan Von Draxen Kalashnikov</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Informações -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📋 Informações</h2>
+                <button class="close-btn" onclick="closeInfo()">×</button>
+            </div>
+            
+            <!-- Uniformes -->
+            <div class="info-section">
+                <h3 class="info-title">👔 FAC CAMPINHO — UNIFORMES OFICIAIS</h3>
+                
+                <div class="info-highlight">
+                    <p class="info-text">
+                        Os uniformes da Campinho não são apenas vestimenta dentro do GTA RP. São símbolo de identidade, organização e respeito. A padronização mostra que somos uma fac estruturada, alinhada e unida.
+                    </p>
+                    <p class="info-text">
+                        Quando estamos uniformizados, mostramos presença, disciplina e compromisso com a nossa bandeira. Cada detalhe carrega o nome da Campinho. <strong style="color: #60a5fa;">Quem veste, representa.</strong>
+                    </p>
+                </div>
+
+                <h4 class="info-subtitle">⚠️ Regras Importantes</h4>
+                <ul class="info-rules">
+                    <li>Dentro da fac é <strong style="color: #60a5fa;">obrigatório</strong> estar uniformizado.</li>
+                    <li>Em ações é <strong style="color: #60a5fa;">obrigatório</strong> o uso do uniforme.</li>
+                    <li>Em dominações é <strong style="color: #60a5fa;">obrigatório</strong> o uso do uniforme.</li>
+                    <li><strong style="color: #ef4444;">Sem exceções.</strong></li>
+                </ul>
+
+                <div class="info-highlight" style="margin-top: 30px;">
+                    <p class="info-text" style="text-align: center; font-weight: 600;">
+                        Manter o padrão é manter a postura.<br>
+                        Desalinhamento enfraquece a imagem da fac.<br>
+                        <span style="color: #60a5fa; font-size: 1.1em;">Campinho é organização. Campinho é presença. Campinho é respeito dentro da city.</span>
+                    </p>
+                </div>
+
+                <h4 class="info-subtitle">📏 Numeração dos Uniformes</h4>
+                <div class="uniform-numbers">
+                    <div class="uniform-card">
+                        <h4>👩 FEMININO</h4>
+                        <p>Jaqueta: <span style="color: #60a5fa; font-size: 1.3em;">0 | 12</span></p>
+                    </div>
+                    <div class="uniform-card">
+                        <h4>👨 MASCULINO</h4>
+                        <p>Jaqueta: <span style="color: #60a5fa; font-size: 1.3em;">11 | 6</span></p>
+                    </div>
+                </div>
+
+                <h4 class="info-subtitle">📸 Referências Visuais</h4>
+                <div class="uniform-images">
+                    <img src="https://i.imgur.com/Kz14H6e.png" alt="Uniforme Masculino">
+                    <img src="https://i.imgur.com/nA3RClh.png" alt="Uniforme Feminino">
+                </div>
+            </div>
+
+            <!-- Rádio -->
+            <div class="radio-section">
+                <h3 class="info-title" style="margin-bottom: 15px;">📻 RÁDIO - CAMPINHO</h3>
+                
+                <div class="radio-frequencies">
+                    <div class="frequency-card">
+                        <div class="frequency-label">Rádio Padrão</div>
+                        <div class="frequency-number">65</div>
+                    </div>
+                    <div class="frequency-card">
+                        <div class="frequency-label">Rádio Ação</div>
+                        <div class="frequency-number">64</div>
+                    </div>
+                </div>
+
+                <h4 class="info-subtitle">📡 Regras do Rádio</h4>
+                <ul class="info-rules">
+                    <li>É <strong style="color: #60a5fa;">obrigatório</strong> estar na rádio padrão (65) quando estiver dentro da fac.</li>
+                    <li>Em ações, todos devem migrar para a rádio de ação (64) <strong style="color: #60a5fa;">antes</strong> de iniciar.</li>
+                    <li>Mantenha a comunicação clara e objetiva. Evite poluição sonora.</li>
+                    <li>Não use a rádio para conversas pessoais. Use apenas para assuntos da fac.</li>
+                    <li>Respeite quem está falando. Não interrompa comunicações importantes.</li>
+                    <li>Após o término da ação, retorne para a rádio padrão (65).</li>
+                    <li><strong style="color: #ef4444;">Quem não estiver na rádio em ações será penalizado.</strong></li>
+                </ul>
+
+                <div class="info-highlight" style="margin-top: 20px;">
+                    <p class="info-text" style="text-align: center; font-weight: 600; color: #60a5fa;">
+                        🎯 Comunicação é a chave do sucesso. Rádio organizado = Fac organizada.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -1001,11 +1323,26 @@
             document.body.style.overflow = 'auto';
         }
 
+        // Funções do Modal de Informações
+        function openInfo() {
+            document.getElementById('infoModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeInfo() {
+            document.getElementById('infoModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
         // Fechar modal ao clicar fora
         window.onclick = function(event) {
-            const modal = document.getElementById('muralModal');
-            if (event.target === modal) {
+            const muralModal = document.getElementById('muralModal');
+            const infoModal = document.getElementById('infoModal');
+            if (event.target === muralModal) {
                 closeMural();
+            }
+            if (event.target === infoModal) {
+                closeInfo();
             }
         }
 
@@ -1013,6 +1350,7 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeMural();
+                closeInfo();
             }
         });
     </script>
